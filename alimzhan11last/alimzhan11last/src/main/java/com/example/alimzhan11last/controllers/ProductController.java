@@ -33,6 +33,21 @@ public class ProductController {
         Product product = productService.getProductById(id);
         model.addAttribute("product", product);
         model.addAttribute("images", product.getImages());
+
+
+        //Start shit
+//        MultipartFile excelFile = product.ToImageEntity(); // Предположим, что файл таблицы Excel находится в объекте Product
+//
+//        if (excelFile != null) {
+//            String originalFilename = excelFile.getOriginalFilename();
+//            String extension = originalFilename.substring(originalFilename.lastIndexOf(".") + 1);
+//
+//            if ("xls".equalsIgnoreCase(extension) || "xlsx".equalsIgnoreCase(extension)) {
+//                model.addAttribute("excelFile", excelFile);
+//            }
+//        }
+
+        //end shit
         return "product-info";
     }
     @PostMapping("/product/create")

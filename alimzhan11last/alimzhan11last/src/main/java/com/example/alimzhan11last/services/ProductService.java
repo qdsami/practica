@@ -46,7 +46,7 @@ public class ProductService {
             product.addImageToProduct(image2);
         }
         if (file3.getSize() != 0){
-            image3 = ToImageEntity(file1);
+            image3 = ToImageEntity(file3);
             product.addImageToProduct(image3);
         }
         log.info("Saving new Prroduct. Title: {}; Author email: {}" , product.getTitle(), product.getUser().getEmail());

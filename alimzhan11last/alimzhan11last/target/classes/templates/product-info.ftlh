@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
     <style>
 
         /*****************globals*************/
@@ -183,7 +184,6 @@
         <div class="container-fliud">
             <div class="wrapper row">
                 <div class="preview col-md-6">
-
                     <div class="preview-pic tab-content">
                         <#list images as img>
                             <div class="tab-pane" id="pic-${img.id}">
@@ -197,8 +197,10 @@
                                 <a data-target="#pic-${img.id}" data-toggle="tab">
                                     <img src="/images/${img.id}">
                                 </a>
-
                             </li>
+
+
+
                         </#list>
                     </ul>
 
@@ -216,6 +218,52 @@
         </div>
     </div>
 </div>
+<script>
+    // Установите библиотеку SheetJS через npm или подключите ее в HTML-файл
+    // npm install xlsx
 
+    const XLSX = require('xlsx');
+
+    // Предполагается, что у вас есть элемент <div> с id "output", в котором будет отображаться HTML-таблица
+    const outputDiv = document.getElementById('output');
+
+    // Загрузка файла XLSX из базы данных
+    fetch('images/2')
+        .then(response => response.arrayBuffer())
+        .then(buffer => {
+            const workbook = XLSX.read(buffer, { type: 'array' });
+
+            let html = '<table>';
+
+            workbook.SheetNames.forEach(function (sheetName) {
+                const worksheet = workbook.Sheets[sheetName];
+                const sheetData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+
+                sheetData.forEach(function (row) {
+                    html += '<tr>';
+
+                    row.forEach(function (cell) {
+                        html += '<td>';
+                        html += cell;
+                        html += '</td>';
+                    });
+
+                    html += '</tr>';
+                });
+            });
+
+            html += '</table>';
+
+            // Отображение результата в элементе <div> с id "output"
+            outputDiv.innerHTML = html;
+        })
+        .catch(error => {
+            console.error('Ошибка при загрузке файла:', error);
+        });
+
+</script>
+<div id="output">
+
+</div>
 </body>
 </html>

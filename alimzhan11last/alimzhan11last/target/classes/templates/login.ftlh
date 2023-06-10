@@ -12,8 +12,8 @@
 </head>
 <body>
 <div class="container">
-    <h2>Bootstrap Tabs Example</h2>
-    <p>The .nav-tabs class is used to create navigation tabs:</p>
+    <h2>Авторизируйтесь</h2>
+    <p>Я хз, но проблема с паролем есть, поэтому вводите лучше пароли на латинице с цифрами символами, но не на кириллице</p>
     <ul class="nav nav-tabs" role="tablist">
         <li><a href="/">Главная</a></li>
         <li class="active"><a href="/login">Войти</a></li>
